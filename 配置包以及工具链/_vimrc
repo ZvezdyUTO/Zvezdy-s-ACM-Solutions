@@ -1,0 +1,43 @@
+" Zvezdy`s vim control!
+" Vim with all enhancements
+source $VIMRUNTIME/vimrc_example.vim
+
+" 基础设置
+color evening
+set guifont=Consolas:h16
+set tabstop=4
+set shiftwidth=4
+set noundofile
+set nobackup
+set noswapfile
+set nu
+cd desktop
+
+" 粘贴板
+set clipboard=unnamedplus
+vnoremap <C-c> "+y
+nnoremap <C-v> "+p
+inoremap <C-v> <C-r>+
+nnoremap <C-z> u
+nnoremap <C-y> <C-r>
+nnoremap <C-a> ggVG
+inoremap <C-a> <Esc>ggVG
+
+" 快速注释和取消注释
+nnoremap <C-/> :call ToggleComment()<CR>
+vnoremap <C-/> :call ToggleComment()<CR>
+
+function! ToggleComment()
+    if getline('.') =~ '^\s*//'
+        execute 'normal! ^xx'
+    else
+        execute 'normal! I//'
+    endif
+endfunction
+
+" 光标设置
+if &term =~ 'xterm\\|rxvt'
+  let &t_SI = "\e[6 q"  " 插入模式下的竖线光标
+  let &t_EI = "\e[2 q"  " 普通模式和可视模式下的方框光标
+  let &t_VE = "\e[2 q"  " 可视模式下的方框光标
+endif
