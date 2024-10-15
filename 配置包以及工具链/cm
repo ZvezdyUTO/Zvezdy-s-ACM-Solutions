@@ -1,0 +1,56 @@
+#!/bin/bash
+
+# 检查是否至少提供了源文件前缀
+if [ $# -lt 2 ]; then
+    echo "Usage: cm <source_prefix> <input_prefix1> [input_prefix2 ... input_prefixN]"
+    exit 1
+fi
+
+# 获取源文件和输出文件
+source_prefix="$1"
+input_file="${source_prefix}.cpp"
+output_file="${source_prefix}.out"
+
+# 检查源文件是否存在
+if [ ! -f "$input_file" ]; then
+    echo "Source file $input_file not found!"
+    exit 1
+fi
+
+# 编译源文件
+echo "Compiling ( •_• ) $input_file ..."
+g++ -o "$output_file" "$input_file"
+
+# 检查编译是否成功
+if [ $? -ne 0 ]; then
+    echo "Compilation failed (д) ﾟﾟ"
+    exit 1
+fi
+
+echo "Compilation successful! (・∀・)"
+
+# 移除源文件参数
+shift
+
+# 遍历所有提供的输入前缀
+for input_prefix in "$@"
+do
+    input_data_file="${input_prefix}.in"
+    output_data_file="${input_prefix}.out"
+
+    # 检查输入文件是否存在
+    if [ ! -f "$input_data_file" ]; then
+        echo "Input file $input_data_file not found, skipping..."
+        continue
+    fi
+
+    echo "Running $output_file with input from $input_data_file..."
+
+    # 运行程序并保存输出到对应的 .out 文件
+    ./"$output_file" < "$input_data_file" > "$output_data_file"
+
+    echo "Output for $input_data_file saved to $output_data_file"
+done
+
+echo "All tests completed (･ω･)"
+
