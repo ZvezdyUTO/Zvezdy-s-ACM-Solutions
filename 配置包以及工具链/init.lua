@@ -1,4 +1,4 @@
---[[
+--[[ 图形标头
 ╔══╗─╔══╗╔══╗╔══╗╔══╗
 ║╔╗║─║╔╗║║╔═╝╚╗╔╝║╔═╝
 ║╚╝╚╗║╚╝║║╚═╗─║║─║║──
@@ -16,6 +16,8 @@ vim.opt.backup = false -- 禁用备份文件
 vim.opt.swapfile = false -- 禁用交换文件
 vim.wo.number = true -- 显示行号
 vim.opt.wrap = false -- 取消自动换行
+-- vim.opt.list = true -- 将空格显示为·
+-- vim.opt.listchars:append("space:·")
 
 -- 剪切到系统剪贴板
 vim.api.nvim_set_keymap("v", "<C-x>", '"+x', { noremap = true, silent = true })
@@ -41,7 +43,7 @@ end
 vim.opt.rtp:prepend(lazypath:gsub("\\", "/"))
 
 vim.cmd([[
-	command! CPPtemplate r C:\Users\asus\template.cpp
+	command! CF r C:\Users\asus\template.cpp
 ]])
 
 -- 使用 Lazy.nvim 安装插件
@@ -187,6 +189,9 @@ require("lazy").setup({
     }
 })
 
+
+
+
 --vim.cmd([[set background=light]]) --设置为浅色背景
 
 -- vim.cmd[[colorscheme tokyonight]] -- Tokyo Night 主题
@@ -210,3 +215,5 @@ vim.api.nvim_create_autocmd("BufWritePre", {
         vim.lsp.buf.format({ async = false })
     end,
 })
+
+
